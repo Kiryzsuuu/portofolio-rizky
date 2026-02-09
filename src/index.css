@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: clamp(17px, 0.75vw + 14px, 20px);
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    line-height: 1.65;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image: linear-gradient(to right, rgb(15 23 42 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(15 23 42 / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    animation: grid-pan 18s linear infinite;
+  }
+
+  .mask-fade {
+    mask-image: radial-gradient(ellipse at top, black 55%, transparent 100%);
+  }
+}
+
+@keyframes grid-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 56px 56px;
+  }
+}
