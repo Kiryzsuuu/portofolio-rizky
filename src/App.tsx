@@ -92,12 +92,12 @@ function App() {
                 {profile.location} · Open to opportunities
               </div>
 
-              <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+              <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
                 <span className="bg-gradient-to-r from-slate-950 to-slate-600 bg-clip-text text-transparent">
                   {profile.headline}
                 </span>
               </h1>
-              <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-slate-700 sm:text-lg md:text-xl">
+              <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-slate-700 sm:text-lg">
                 {profile.summary}
               </p>
             </div>
