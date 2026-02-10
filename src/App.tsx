@@ -1,6 +1,15 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { HiSparkles } from 'react-icons/hi2'
-import { FaAws, FaCodeBranch, FaDatabase, FaMicrosoft } from 'react-icons/fa6'
+import {
+  FaAws,
+  FaCodeBranch,
+  FaDatabase,
+  FaEnvelope,
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+  FaMicrosoft,
+} from 'react-icons/fa6'
 import { MdSupportAgent } from 'react-icons/md'
 import { profile } from './data/profile'
 
@@ -321,13 +330,10 @@ function App() {
                 className="rounded-xl bg-sky-600 px-4 py-2.5 text-base font-medium text-white hover:bg-sky-500"
                 href={`mailto:${profile.email}`}
               >
-                Email: {profile.email}
-              </a>
-              <a
-                className="rounded-xl border border-slate-200 bg-white/60 px-4 py-2.5 text-base font-medium text-slate-900 hover:bg-white"
-                href={`tel:${profile.phone}`}
-              >
-                Phone: {profile.phone}
+                <span className="inline-flex items-center gap-2">
+                  <FaEnvelope aria-hidden className="h-4 w-4" />
+                  Email
+                </span>
               </a>
               <a
                 className="rounded-xl border border-slate-200 bg-white/60 px-4 py-2.5 text-base font-medium text-slate-900 hover:bg-white"
@@ -335,7 +341,10 @@ function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                LinkedIn
+                <span className="inline-flex items-center gap-2">
+                  <FaLinkedin aria-hidden className="h-4 w-4" />
+                  LinkedIn
+                </span>
               </a>
               {profile.links.instagram ? (
                 <a
@@ -344,7 +353,10 @@ function App() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Instagram
+                  <span className="inline-flex items-center gap-2">
+                    <FaInstagram aria-hidden className="h-4 w-4" />
+                    Instagram
+                  </span>
                 </a>
               ) : null}
               {profile.links.github ? (
@@ -354,7 +366,10 @@ function App() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  GitHub
+                  <span className="inline-flex items-center gap-2">
+                    <FaGithub aria-hidden className="h-4 w-4" />
+                    GitHub
+                  </span>
                 </a>
               ) : null}
             </div>

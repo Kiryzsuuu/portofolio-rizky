@@ -139,7 +139,7 @@ export const profile = {
     },
   ],
   links: {
-    github: 'https://github.com/Kiryzsuuu/portofolio-rizky',
+    github: 'https://github.com/Kiryzsuuu',
     linkedin: 'https://www.linkedin.com/in/rizky-fadhillah-7646b7349',
     instagram: 'https://instagram.com/kiryz_su',
     cvPdf: '/cv-rizky-fadhillah.pdf',
