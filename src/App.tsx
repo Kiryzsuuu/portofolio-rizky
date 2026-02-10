@@ -1,4 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { HiSparkles } from 'react-icons/hi2'
+import { FaAws, FaCodeBranch, FaDatabase, FaMicrosoft } from 'react-icons/fa6'
+import { MdSupportAgent } from 'react-icons/md'
 import { profile } from './data/profile'
 
 function classNames(...values: Array<string | false | null | undefined>) {
@@ -18,6 +21,19 @@ function App() {
   const reveal = {
     hidden: { opacity: 0, y: 14 },
     visible: { opacity: 1, y: 0 },
+  }
+
+  const highlightIcon = (label: string) => {
+    const key = label.trim().toLowerCase()
+
+    if (key === 'artificial intelligence' || key === 'ai') return HiSparkles
+    if (key === 'microsoft azure' || key === 'azure') return FaMicrosoft
+    if (key === 'aws' || key.includes('amazon')) return FaAws
+    if (key === 'azure devops' || key === 'devops') return FaCodeBranch
+    if (key === 'azure cosmos db' || key === 'cosmos db') return FaDatabase
+    if (key === 'technical support' || key === 'support') return MdSupportAgent
+
+    return null
   }
 
   return (
@@ -150,9 +166,13 @@ function App() {
             {profile.stackHighlights.map((item) => (
               <span
                 key={item}
-                className="rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-sm text-slate-700"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-sm text-slate-700"
               >
-                {item}
+                {(() => {
+                  const Icon = highlightIcon(item)
+                  return Icon ? <Icon aria-hidden className="h-4 w-4 text-slate-700" /> : null
+                })()}
+                <span>{item}</span>
               </span>
             ))}
           </div>
