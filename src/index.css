@@ -5,12 +5,12 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-size: clamp(16px, 0.5vw + 14px, 18px);
+    font-size: clamp(15.5px, 0.45vw + 13.8px, 17.5px);
   }
 
   body {
     @apply bg-slate-50 text-slate-900 antialiased;
-    line-height: 1.65;
+    line-height: 1.7;
   }
 }
 
