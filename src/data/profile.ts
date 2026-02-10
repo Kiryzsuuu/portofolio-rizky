@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Rizky Fadhillah',
-  headline: 'Undergraduate IT Student • AI Engineer Intern • Cloud & DevOps Enthusiast',
+  headline: 'Undergraduate IT Student, AI Engineer, Web Developer, Cloud & DevOps Enthusiast',
   location: 'Depok, Jawa Barat',
   photo: '/profile.jpg',
   email: 'maskiryz23@gmail.com',
