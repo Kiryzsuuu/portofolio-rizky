@@ -327,7 +327,7 @@ function App() {
             <div className="text-slate-700">Want to build something together?</div>
             <div className="mt-4 flex flex-wrap gap-3">
               <a
-                className="rounded-xl bg-sky-600 px-4 py-2.5 text-base font-medium text-white hover:bg-sky-500"
+                className="rounded-xl border border-slate-200 bg-white/60 px-4 py-2.5 text-base font-medium text-slate-900 hover:bg-white"
                 href={`mailto:${profile.email}`}
               >
                 <span className="inline-flex items-center gap-2">
