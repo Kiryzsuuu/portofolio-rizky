@@ -21,7 +21,7 @@ function App() {
   }
 
   return (
-    <div className="relative min-h-dvh overflow-hidden">
+    <div className="relative min-h-dvh overflow-hidden px-3 py-3 sm:px-4 sm:py-4">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-60" />
       <div className="pointer-events-none absolute inset-0 mask-fade">
         <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-sky-500/15 blur-3xl" />
@@ -29,62 +29,63 @@ function App() {
         <div className="absolute bottom-0 right-0 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-3xl" />
       </div>
 
-      <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/70 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <a href="#top" className="font-semibold tracking-tight">
-            {profile.name}
-          </a>
-          <nav className="hidden gap-6 text-base text-slate-700 md:flex">
-            <a className="hover:text-slate-950" href="#about">
-              About
+      <div className="relative mx-auto max-w-6xl rounded-3xl border border-slate-200/80 bg-white/55">
+        <header className="sticky top-3 z-20 rounded-t-3xl border-b border-slate-200/80 bg-white/70 backdrop-blur sm:top-4">
+          <div className="flex items-center justify-between px-4 py-3">
+            <a href="#top" className="font-semibold tracking-tight">
+              {profile.name}
             </a>
-            <a className="hover:text-slate-950" href="#skills">
-              Skills
-            </a>
-            <a className="hover:text-slate-950" href="#projects">
-              Projects
-            </a>
-            <a className="hover:text-slate-950" href="#experience">
-              Experience
-            </a>
-            <a className="hover:text-slate-950" href="#education">
-              Education
-            </a>
-            <a className="hover:text-slate-950" href="#contact">
-              Contact
-            </a>
-          </nav>
-          <div className="flex items-center gap-2">
-            {profile.links.github ? (
+            <nav className="hidden gap-6 text-base text-slate-700 md:flex">
+              <a className="hover:text-slate-950" href="#about">
+                About
+              </a>
+              <a className="hover:text-slate-950" href="#skills">
+                Skills
+              </a>
+              <a className="hover:text-slate-950" href="#projects">
+                Projects
+              </a>
+              <a className="hover:text-slate-950" href="#experience">
+                Experience
+              </a>
+              <a className="hover:text-slate-950" href="#education">
+                Education
+              </a>
+              <a className="hover:text-slate-950" href="#contact">
+                Contact
+              </a>
+            </nav>
+            <div className="flex items-center gap-2">
+              {profile.links.github ? (
+                <a
+                  className="rounded-lg border border-slate-200 bg-white/60 px-3 py-2 text-base text-slate-900 hover:bg-white"
+                  href={profile.links.github}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub
+                </a>
+              ) : null}
               <a
-                className="rounded-lg border border-slate-200 bg-white/60 px-3 py-2 text-base text-slate-900 hover:bg-white"
-                href={profile.links.github}
+                className="rounded-lg bg-sky-600 px-3 py-2 text-base font-medium text-white hover:bg-sky-500"
+                href={profile.links.cvPdf}
                 target="_blank"
                 rel="noreferrer"
               >
-                GitHub
+                Download CV
               </a>
-            ) : null}
-            <a
-              className="rounded-lg bg-sky-600 px-3 py-2 text-base font-medium text-white hover:bg-sky-500"
-              href={profile.links.cvPdf}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Download CV
-            </a>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <main id="top" className="mx-auto max-w-6xl px-4 pb-14 pt-8 sm:pt-10 md:pb-16 md:pt-12">
-        <motion.section
-          initial={reduceMotion ? undefined : 'hidden'}
-          animate={reduceMotion ? undefined : 'visible'}
-          variants={reveal}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="relative"
-        >
+        <main id="top" className="px-4 pb-14 pt-8 sm:pt-10 md:pb-16 md:pt-12">
+          <motion.section
+            initial={reduceMotion ? undefined : 'hidden'}
+            animate={reduceMotion ? undefined : 'visible'}
+            variants={reveal}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="relative"
+          >
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-sm text-slate-700">
@@ -155,7 +156,7 @@ function App() {
               </span>
             ))}
           </div>
-        </motion.section>
+          </motion.section>
 
         <Section id="about" title="About">
           <div className="grid gap-6 md:grid-cols-3">
@@ -340,10 +341,11 @@ function App() {
           </div>
         </Section>
 
-        <footer className="mt-14 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} {profile.name}. Built with React + Vite.
-        </footer>
-      </main>
+          <footer className="mt-14 text-center text-sm text-slate-500">
+            © {new Date().getFullYear()} {profile.name}. Built with React + Vite.
+          </footer>
+        </main>
+      </div>
     </div>
   )
 }
