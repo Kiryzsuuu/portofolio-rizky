@@ -167,7 +167,13 @@ function App() {
               className="rounded-xl border border-slate-200 bg-white/60 px-4 py-2.5 text-base font-medium text-slate-900 hover:bg-white"
               href={`mailto:${profile.email}`}
             >
-              Email Me
+              <span className="inline-flex flex-col items-start leading-tight">
+                <span className="inline-flex items-center gap-2">
+                  <FaEnvelope aria-hidden className="h-4 w-4" />
+                  Email
+                </span>
+                <span className="text-sm text-slate-500">{profile.email}</span>
+              </span>
             </a>
           </div>
 
@@ -330,9 +336,12 @@ function App() {
                 className="rounded-xl border border-slate-200 bg-white/60 px-4 py-2.5 text-base font-medium text-slate-900 hover:bg-white"
                 href={`mailto:${profile.email}`}
               >
-                <span className="inline-flex items-center gap-2">
-                  <FaEnvelope aria-hidden className="h-4 w-4" />
-                  Email
+                <span className="inline-flex flex-col items-start leading-tight">
+                  <span className="inline-flex items-center gap-2">
+                    <FaEnvelope aria-hidden className="h-4 w-4" />
+                    Email
+                  </span>
+                  <span className="text-sm text-slate-500">{profile.email}</span>
                 </span>
               </a>
               <a
