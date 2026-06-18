@@ -1,0 +1,195 @@
+import type { Content } from './types'
+
+export const defaultContent: Content = {
+  settings: {
+    name: 'Rizky Fadhillah',
+    headline: {
+      en: 'Undergraduate IT Student, AI Engineer, Web Developer, Cloud & DevOps Enthusiast',
+      id: 'Mahasiswa S1 Teknologi Informasi, AI Engineer, Web Developer, Penggiat Cloud & DevOps',
+    },
+    location: 'Depok, Jawa Barat',
+    photo: '/profile.jpg',
+    email: 'maskiryz23@gmail.com',
+    phone: '081296502240',
+    summary: {
+      en: "I'm Rizky Fadhillah, a student of the Information Technology Study Program at Telkom University with strong enthusiasm for exploring technology. I'm always open to learning new things both independently and collaboratively, and highly motivated to broaden my horizons and enhance my skills in system development, networking, and other digital technologies.",
+      id: 'Saya Rizky Fadhillah, mahasiswa Program Studi Teknologi Informasi di Telkom University dengan antusiasme tinggi untuk mengeksplorasi teknologi. Saya selalu terbuka untuk mempelajari hal baru baik secara mandiri maupun kolaboratif, serta sangat termotivasi untuk memperluas wawasan dan meningkatkan kemampuan di bidang pengembangan sistem, jaringan, dan teknologi digital lainnya.',
+    },
+    about: {
+      en: 'I also have professional experience as an AI Engineer Intern at SoftwareOne Indonesia, where I worked on an Interactive Call Agent project and gained hands-on experience applying artificial intelligence solutions to real-world business needs.',
+      id: 'Saya juga memiliki pengalaman profesional sebagai AI Engineer Intern di SoftwareOne Indonesia, di mana saya mengerjakan proyek Interactive Call Agent dan memperoleh pengalaman langsung menerapkan solusi kecerdasan buatan untuk kebutuhan bisnis nyata.',
+    },
+    personalData: {
+      placeAndDateOfBirth: 'Depok, 23 Februari 2005',
+      gender: 'Male',
+      status: 'Single',
+      citizenship: 'Indonesia',
+    },
+    stackHighlights: [
+      'Artificial Intelligence',
+      'Microsoft Azure',
+      'AWS',
+      'Azure DevOps',
+      'Azure Cosmos DB',
+      'Technical Support',
+    ],
+    links: {
+      github: 'https://github.com/Kiryzsuuu',
+      linkedin: 'https://www.linkedin.com/in/rizky-fadhillah-7646b7349',
+      instagram: 'https://instagram.com/kiryz_su',
+      cvPdf: '/cv-rizky-fadhillah.pdf',
+    },
+    site: {
+      accent: 'sky',
+      defaultLang: 'en',
+      sections: {
+        about: true,
+        skills: true,
+        projects: true,
+        experience: true,
+        education: true,
+        contact: true,
+      },
+    },
+  },
+  skills: [
+    { title: 'AI', items: ['Artificial Intelligence (AI)'], order: 0 },
+    {
+      title: 'Cloud & DevOps',
+      items: ['Microsoft Azure', 'Amazon Web Service (AWS)', 'Azure DevOps Services', 'Azure Cosmos DB'],
+      order: 1,
+    },
+    {
+      title: 'Other',
+      items: ['Technical Support', 'Mobile Application Design', 'Networking (learning)'],
+      order: 2,
+    },
+  ],
+  projects: [
+    {
+      name: 'CineWave — Streaming Platform',
+      description: {
+        en: 'Netflix-style streaming platform with authentication, movie catalog, watchlist, and interactive UI, deployed on Azure App Service.',
+        id: 'Platform streaming bergaya Netflix dengan autentikasi, katalog film, watchlist, dan UI interaktif, di-deploy di Azure App Service.',
+      },
+      tech: ['Laravel', 'PHP', 'Blade', 'Tailwind CSS', 'Alpine.js', 'Vite', 'MongoDB'],
+      link: 'https://github.com/Kiryzsuuu/CineWave',
+      image: '',
+      order: 0,
+    },
+    {
+      name: 'Cinemox — Cinema Booking System',
+      description: {
+        en: 'Full-featured cinema booking web app with OTP email verification, JWT auth, seat booking, email confirmation (barcode/QR), and admin dashboard.',
+        id: 'Aplikasi web pemesanan bioskop lengkap dengan verifikasi OTP email, autentikasi JWT, pemilihan kursi, konfirmasi email (barcode/QR), dan dashboard admin.',
+      },
+      tech: [
+        'Java',
+        'Spring Boot',
+        'Spring Security (JWT)',
+        'MongoDB',
+        'Spring Mail',
+        'ZXing',
+        'HTML/CSS/JavaScript',
+        'Chart.js',
+      ],
+      link: 'https://github.com/kiryzsuuu/cinemox',
+      image: '',
+      order: 1,
+    },
+    {
+      name: 'CStress — Stress Consultation + Face Tracking',
+      description: {
+        en: 'Non-medical early consultation chat for stress level with topic/summary insights, connected with real-time local face tracking.',
+        id: 'Chat konsultasi awal non-medis untuk tingkat stres dengan ringkasan/topik wawasan, terhubung dengan pelacakan wajah lokal secara real-time.',
+      },
+      tech: [
+        'React',
+        'TypeScript',
+        'Vite',
+        'FastAPI',
+        'OpenCV',
+        'MediaPipe',
+        'SSE Streaming',
+        'WebSocket',
+        'OpenAI API',
+      ],
+      link: 'https://github.com/kiryzsuuu/cstress',
+      image: '',
+      order: 2,
+    },
+    {
+      name: 'Interactive Call Agent — SoftwareOne Indonesia',
+      description: {
+        en: 'Interactive voice AI agent integrated with WhatsApp Business API and Microsoft Bookings, including PDF menu upload + OCR and a monitoring dashboard.',
+        id: 'Agen AI suara interaktif yang terintegrasi dengan WhatsApp Business API dan Microsoft Bookings, termasuk unggah menu PDF + OCR dan dashboard pemantauan.',
+      },
+      tech: [
+        'LiveKit Agents',
+        'OpenAI Realtime API',
+        'Python',
+        'FastAPI',
+        'Next.js',
+        'TypeScript',
+        'WhatsApp Business API',
+        'Microsoft Graph Bookings API',
+        'OCR (Tesseract)',
+      ],
+      link: 'https://github.com/Kiryzsuuu/Call-Agent',
+      image: '',
+      order: 3,
+    },
+    {
+      name: 'Portfolio Website',
+      description: {
+        en: 'My personal portfolio website built with modern web tooling and smooth UI motion.',
+        id: 'Website portofolio pribadi saya yang dibangun dengan tooling web modern dan animasi UI yang halus.',
+      },
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Next.js'],
+      link: 'https://github.com/Kiryzsuuu/portofolio-rizky',
+      image: '',
+      order: 4,
+    },
+    {
+      name: 'Digital Transformation in Aviation Education — PPI Curug',
+      description: {
+        en: 'Project focused on digital transformation in aviation education.',
+        id: 'Proyek yang berfokus pada transformasi digital di pendidikan penerbangan.',
+      },
+      tech: ['Digital Transformation'],
+      link: '',
+      image: '',
+      order: 5,
+    },
+    {
+      name: 'Village and UMKM Website Development — Cikasungka Village',
+      description: {
+        en: 'Website development project for village and UMKM needs.',
+        id: 'Proyek pengembangan website untuk kebutuhan desa dan UMKM.',
+      },
+      tech: ['Web Development'],
+      link: '',
+      image: '',
+      order: 6,
+    },
+  ],
+  experience: [
+    {
+      role: 'AI Engineer Intern',
+      company: 'SoftwareOne Indonesia',
+      period: '2025',
+      highlights: [
+        'Worked on an Interactive Call Agent project.',
+        'Applied AI solutions to real-world business needs.',
+        'Gained hands-on experience in practical AI implementation.',
+      ],
+      order: 0,
+    },
+  ],
+  education: [
+    { school: 'S1 Telkom University', period: '2023 — Present', order: 0 },
+    { school: 'SMA Al-Azhar 19 Ciracas', period: '2020 — 2023', order: 1 },
+    { school: 'MTS PKP JIS', period: '2017 — 2020', order: 2 },
+    { school: 'SD Negeri Mekarsari 2', period: '2011 — 2017', order: 3 },
+  ],
+}
