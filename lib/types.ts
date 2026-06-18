@@ -10,6 +10,13 @@ export type Project = {
   link: string
   image: string
   order: number
+  // Detail page fields (all optional for backward compatibility)
+  details?: Localized
+  goal?: Localized
+  duration?: string
+  role?: string
+  year?: string
+  gallery?: string[]
 }
 
 export type Experience = {

@@ -8,7 +8,7 @@ function cx(...v: Array<string | false | null | undefined>) {
   return v.filter(Boolean).join(' ')
 }
 
-type FieldType = 'text' | 'textarea' | 'localized' | 'localizedArea' | 'list' | 'number' | 'image'
+type FieldType = 'text' | 'textarea' | 'localized' | 'localizedArea' | 'list' | 'number' | 'image' | 'gallery'
 type FieldDef = { key: string; label: string; type: FieldType }
 
 const MAX_UPLOAD_BYTES = 4 * 1024 * 1024 // 4 MB
@@ -27,10 +27,16 @@ type Item = Record<string, unknown> & { _id?: string }
 const SCHEMAS: Record<CollectionName, FieldDef[]> = {
   projects: [
     { key: 'name', label: 'Name', type: 'text' },
-    { key: 'description', label: 'Description', type: 'localizedArea' },
+    { key: 'description', label: 'Short description (shown on card)', type: 'localizedArea' },
+    { key: 'details', label: 'Full description (detail page)', type: 'localizedArea' },
+    { key: 'goal', label: 'Goal / purpose', type: 'localizedArea' },
+    { key: 'role', label: 'Your role', type: 'text' },
+    { key: 'duration', label: 'Build time (e.g. 3 weeks)', type: 'text' },
+    { key: 'year', label: 'Year', type: 'text' },
     { key: 'tech', label: 'Tech (one per line)', type: 'list' },
     { key: 'link', label: 'Link', type: 'text' },
-    { key: 'image', label: 'Image (upload or URL)', type: 'image' },
+    { key: 'image', label: 'Cover image (upload or URL)', type: 'image' },
+    { key: 'gallery', label: 'Gallery images', type: 'gallery' },
     { key: 'order', label: 'Order', type: 'number' },
   ],
   experience: [
@@ -164,6 +170,64 @@ function ImageField({
   )
 }
 
+function GalleryField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string
+  value: string[]
+  onChange: (v: string[]) => void
+}) {
+  const [error, setError] = useState('')
+  const images = value || []
+
+  const onPick = async (files?: FileList | null) => {
+    if (!files || !files.length) return
+    setError('')
+    const added: string[] = []
+    for (const file of Array.from(files)) {
+      if (file.size > MAX_UPLOAD_BYTES) {
+        setError('One image was too large (max 4 MB) and was skipped.')
+        continue
+      }
+      added.push(await fileToDataUrl(file))
+    }
+    if (added.length) onChange([...images, ...added])
+  }
+
+  return (
+    <div>
+      <label className={LABEL}>{label}</label>
+      {images.length ? (
+        <div className="mb-2 grid grid-cols-3 gap-2 sm:grid-cols-4">
+          {images.map((src, i) => (
+            <div key={i} className="relative overflow-hidden rounded-lg border border-slate-200">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={src} alt={`gallery ${i + 1}`} className="h-20 w-full object-cover" />
+              <button
+                type="button"
+                onClick={() => onChange(images.filter((_, idx) => idx !== i))}
+                className="absolute right-1 top-1 rounded bg-black/60 px-1.5 text-xs text-white hover:bg-black/80"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      <input
+        type="file"
+        accept="image/*"
+        multiple
+        onChange={(e) => onPick(e.target.files)}
+        className="block w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-900 file:px-3 file:py-1.5 file:text-sm file:text-white hover:file:bg-slate-800"
+      />
+      {error ? <p className="mt-1 text-sm text-red-600">{error}</p> : null}
+    </div>
+  )
+}
+
 function FileField({
   label,
   accept,
@@ -228,7 +292,7 @@ function emptyItem(fields: FieldDef[]): Item {
   const item: Item = {}
   for (const f of fields) {
     if (f.type === 'localized' || f.type === 'localizedArea') item[f.key] = { en: '', id: '' }
-    else if (f.type === 'list') item[f.key] = []
+    else if (f.type === 'list' || f.type === 'gallery') item[f.key] = []
     else if (f.type === 'number') item[f.key] = 0
     else item[f.key] = ''
   }
@@ -270,6 +334,10 @@ function FieldInput({
 
   if (field.type === 'image') {
     return <ImageField label={field.label} value={(value as string) || ''} onChange={onChange} />
+  }
+
+  if (field.type === 'gallery') {
+    return <GalleryField label={field.label} value={(value as string[]) || []} onChange={onChange} />
   }
 
   if (field.type === 'list') {

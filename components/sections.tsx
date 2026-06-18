@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { HiSparkles } from 'react-icons/hi2'
 import {
-  FaArrowRight,
   FaAws,
   FaCodeBranch,
   FaDatabase,
@@ -125,7 +124,6 @@ export function Hero({ settings, projects }: { settings: Settings; projects: Pro
           href="/projects"
         >
           {tr(ui.actions.viewProjects, lang)}
-          <FaArrowRight aria-hidden className="h-3.5 w-3.5" />
         </Link>
         <a
           className="rounded-xl border border-slate-200 bg-white/60 px-4 py-2.5 text-base font-medium text-slate-900 transition-colors hover:bg-white"
@@ -168,7 +166,7 @@ export function Hero({ settings, projects }: { settings: Settings; projects: Pro
               {tr(ui.nav.projects, lang)}
             </h2>
             <Link href="/projects" className="text-sm font-medium text-sky-600 hover:text-sky-500">
-              {tr(ui.actions.viewProjects, lang)} →
+              {tr(ui.actions.viewProjects, lang)}
             </Link>
           </div>
           <ProjectsGrid projects={projects.slice(0, 4)} />
@@ -241,7 +239,7 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
 
   return (
     <div className="grid gap-5 sm:grid-cols-2">
-      {projects.map((project) => {
+      {projects.map((project, index) => {
         const projInitials = project.name
           .replace(/[—-].*$/, '')
           .trim()
@@ -250,6 +248,7 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
           .slice(0, 2)
           .map((p) => p[0]?.toUpperCase())
           .join('')
+        const slug = project._id || String(index)
         return (
           <motion.article
             key={project._id || project.name}
@@ -257,54 +256,155 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/60 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/10"
+            className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/60 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-900/10"
           >
-            <div className="relative h-36 overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-sky-100 via-indigo-100 to-fuchsia-100">
-              {project.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center">
-                  <span className="bg-gradient-to-br from-slate-700 to-slate-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent">
-                    {projInitials}
-                  </span>
+            {project.link ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                className="absolute right-3 top-3 z-10 shrink-0 rounded-lg border border-slate-200 bg-white/80 px-3 py-1.5 text-sm text-slate-900 backdrop-blur transition-colors hover:bg-white"
+              >
+                {project.link.includes('github.com') ? tr(ui.actions.repo, lang) : tr(ui.actions.live, lang)}
+              </a>
+            ) : null}
+            <Link href={`/projects/${slug}`} className="flex flex-1 flex-col">
+              <div className="relative h-36 overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-sky-100 via-indigo-100 to-fuchsia-100">
+                {project.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center">
+                    <span className="bg-gradient-to-br from-slate-700 to-slate-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent">
+                      {projInitials}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="text-lg font-semibold text-slate-900 group-hover:text-sky-700">{project.name}</div>
+                <p className="mt-1 text-base text-slate-700">{tr(project.description, lang)}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-sm text-slate-700"
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
-              )}
-            </div>
-            <div className="flex flex-1 flex-col p-5">
-              <div className="flex items-start justify-between gap-3">
-                <div className="text-lg font-semibold text-slate-900">{project.name}</div>
-                {project.link ? (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="shrink-0 rounded-lg border border-slate-200 bg-white/60 px-3 py-1.5 text-sm text-slate-900 transition-colors hover:bg-white"
-                  >
-                    {project.link.includes('github.com') ? tr(ui.actions.repo, lang) : tr(ui.actions.live, lang)}
-                  </a>
-                ) : null}
               </div>
-              <p className="mt-1 text-base text-slate-700">{tr(project.description, lang)}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-sm text-slate-700"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
+            </Link>
           </motion.article>
         )
       })}
     </div>
+  )
+}
+
+export function ProjectDetail({ project }: { project: Project }) {
+  const { lang } = useLang()
+  const meta: Array<{ label: string; value?: string }> = [
+    { label: tr(ui.project.role, lang), value: project.role },
+    { label: tr(ui.project.duration, lang), value: project.duration },
+    { label: tr(ui.project.year, lang), value: project.year },
+  ]
+  const shownMeta = meta.filter((m) => m.value && m.value.trim())
+  const gallery = (project.gallery || []).filter(Boolean)
+
+  return (
+    <article className="mx-auto max-w-3xl">
+      <Link
+        href="/projects"
+        className="mb-6 inline-flex items-center text-sm font-medium text-sky-600 hover:text-sky-500"
+      >
+        {tr(ui.actions.backToProjects, lang)}
+      </Link>
+
+      <div className="relative mb-6 h-56 overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-sky-100 via-indigo-100 to-fuchsia-100 sm:h-72">
+        {project.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={project.image} alt={project.name} className="h-full w-full object-cover" />
+        ) : null}
+      </div>
+
+      <h1 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">{project.name}</h1>
+
+      <div className="mt-3 flex flex-wrap gap-3">
+        {project.link ? (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-lg border border-slate-200 bg-white/60 px-3 py-1.5 text-sm text-slate-900 transition-colors hover:bg-white"
+          >
+            {project.link.includes('github.com') ? tr(ui.actions.repo, lang) : tr(ui.actions.live, lang)}
+          </a>
+        ) : null}
+      </div>
+
+      {shownMeta.length ? (
+        <dl className="mt-6 grid gap-4 rounded-2xl border border-slate-200 bg-white/60 p-5 sm:grid-cols-3">
+          {shownMeta.map((m) => (
+            <div key={m.label}>
+              <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">{m.label}</dt>
+              <dd className="mt-1 text-base text-slate-900">{m.value}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
+
+      <section className="mt-6">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">{tr(ui.project.overview, lang)}</h2>
+        <p className="mt-2 whitespace-pre-line text-base leading-relaxed text-slate-700">
+          {project.details && tr(project.details, lang).trim()
+            ? tr(project.details, lang)
+            : tr(project.description, lang)}
+        </p>
+      </section>
+
+      {project.goal && tr(project.goal, lang).trim() ? (
+        <section className="mt-6">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">{tr(ui.project.goal, lang)}</h2>
+          <p className="mt-2 whitespace-pre-line text-base leading-relaxed text-slate-700">{tr(project.goal, lang)}</p>
+        </section>
+      ) : null}
+
+      {project.tech.length ? (
+        <section className="mt-6">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">{tr(ui.project.techStack, lang)}</h2>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {project.tech.map((t) => (
+              <span key={t} className="rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-sm text-slate-700">
+                {t}
+              </span>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {gallery.length ? (
+        <section className="mt-6">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">{tr(ui.project.gallery, lang)}</h2>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            {gallery.map((src, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={i}
+                src={src}
+                alt={`${project.name} ${i + 1}`}
+                className="w-full rounded-xl border border-slate-200 object-cover"
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
+    </article>
   )
 }
 

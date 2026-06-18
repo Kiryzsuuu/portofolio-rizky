@@ -26,6 +26,17 @@ export const ui = {
     repo: { en: 'Repo', id: 'Repo' },
     live: { en: 'Live', id: 'Live' },
     preview: { en: 'Preview', id: 'Pratinjau' },
+    viewDetails: { en: 'View details', id: 'Lihat detail' },
+    backToProjects: { en: 'Back to projects', id: 'Kembali ke proyek' },
+  },
+  project: {
+    overview: { en: 'Overview', id: 'Ringkasan' },
+    goal: { en: 'Goal', id: 'Tujuan' },
+    duration: { en: 'Build time', id: 'Lama pengerjaan' },
+    role: { en: 'Role', id: 'Peran' },
+    year: { en: 'Year', id: 'Tahun' },
+    techStack: { en: 'Tech stack', id: 'Teknologi' },
+    gallery: { en: 'Gallery', id: 'Galeri' },
   },
   personal: {
     title: { en: 'Personal Data', id: 'Data Pribadi' },
