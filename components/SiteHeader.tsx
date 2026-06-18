@@ -17,13 +17,6 @@ export function SiteHeader({ settings }: { settings: Settings }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
-  const initials = settings.name
-    .split(' ')
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((p) => p[0]?.toUpperCase())
-    .join('')
-
   const links = [
     { href: '/', label: tr(ui.nav.home, lang) },
     { href: '/about', label: tr(ui.nav.about, lang) },
@@ -40,10 +33,7 @@ export function SiteHeader({ settings }: { settings: Settings }) {
     <header className="sticky top-3 z-30 rounded-2xl border border-slate-200/80 bg-white/80 backdrop-blur sm:top-4">
       <div className="flex items-center justify-between gap-3 px-4 py-3">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 text-sm font-bold text-white shadow-sm">
-            {initials}
-          </span>
-          <span className="hidden sm:inline">{settings.name}</span>
+          <span>{settings.name}</span>
         </Link>
 
         <nav className="hidden gap-1 text-base text-slate-700 lg:flex">
